@@ -37,7 +37,7 @@ public class ChoiceListServiceImpl implements ChoiceListService {
 
     @Override
     public ChoiceList updateChoiceList(ChoiceList choiceList) {
-        if(choiceList.getId() == null){
+        if (choiceList.getId() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing id");
         }
 
@@ -60,9 +60,13 @@ public class ChoiceListServiceImpl implements ChoiceListService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "List " + id + " does not exist"));
     }
 
-    public Boolean getChoice(ChoiceList choiceList){
-        int positiveSum = choiceList.getPositiveEntries().stream() .mapToInt(Entry::getWeight).sum();
-        int negativeSum = choiceList.getNegativeEntries().stream() .mapToInt(Entry::getWeight).sum();
+    public Boolean getChoice(ChoiceList choiceList) {
+        int positiveSum = choiceList.getPositiveEntries().stream().mapToInt(Entry::getWeight).sum();
+        int negativeSum = choiceList.getNegativeEntries().stream().mapToInt(Entry::getWeight).sum();
+
+        if (positiveSum - negativeSum == 0) {
+            return choiceList.getPositiveEntries().size() > choiceList.getNegativeEntries().size();
+        }
 
         return positiveSum - negativeSum >= 0;
     }
