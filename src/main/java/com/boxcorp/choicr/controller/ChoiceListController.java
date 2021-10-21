@@ -16,7 +16,6 @@ public class ChoiceListController {
     }
 
     @PostMapping(value = "/lists")
-    @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public ChoiceList createChoiceList(@RequestBody ChoiceList choiceList) {
 
@@ -24,7 +23,6 @@ public class ChoiceListController {
     }
 
     @PutMapping(value = "/lists")
-    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public ChoiceList updateChoiceList(@RequestBody ChoiceList choiceList) {
 
@@ -32,7 +30,6 @@ public class ChoiceListController {
     }
 
     @GetMapping(value = "/lists/{id}")
-    @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     public ChoiceList getChoiceList(@PathVariable String id) {
 
